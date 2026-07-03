@@ -8,4 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class UserProgress extends Model
 {
     use HasFactory;
+
+    protected $table = 'user_progress';
+
+    protected $fillable = [
+        'user_id',
+        'lesson_id',
+        'completed'
+    ];
+
+    protected $casts = [
+        'completed' => 'boolean'
+    ];
+
+    public function lesson()
+    {
+        return $this->belongsTo(Lesson::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

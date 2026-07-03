@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\LessonController;
 use App\Http\Controllers\Api\ProgressController;
 use App\Http\Controllers\Api\QuizController;
+use App\Http\Controllers\Api\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +26,13 @@ use App\Http\Controllers\Api\QuizController;
 // });
 
 
-Route::post('/login', [AuthController::class, 'login']);
 
+
+  Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
+
+  
+    Route::put('/change-password',[UserController::class,'changePassword']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
      // Profile
@@ -36,7 +41,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Courses
     Route::get('/courses', [CourseController::class, 'index']);
-    Route::get('/courses/{id}', [CourseController::class, 'show']);
+    Route::get('/courses/{slug}', [CourseController::class, 'show']);
+    Route::get('/continue-learning', [CourseController::class, 'continueLearning']);
+    Route::get('/search', [CourseController::class, 'search']);
 
     // Lessons
     Route::get('/courses/{id}/lessons', [LessonController::class, 'lessons']);
@@ -45,8 +52,15 @@ Route::middleware('auth:sanctum')->group(function () {
      // Progress
     Route::post('/lesson/complete', [ProgressController::class, 'complete']);
     Route::get('/progress', [ProgressController::class, 'progress']);
+    Route::get('/courses/{slug}/lessons', [LessonController::class, 'lessonsBySlug']);
 
     // Quiz
     Route::get('/lessons/{id}/quiz', [QuizController::class, 'quiz']);
+    Route::post('/quiz/submit',[QuizController::class,'submit']);
+    
+
+    //Home
+    Route::get('/home', [HomeController::class, 'index']);
+    
 
 });
