@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Lesson;
 use App\Models\UserProgress;
+use App\Models\CourseProgress;
+use App\Models\UserStreak;
+use App\Models\XpHistory;
 
 class HomeController extends Controller
 {
@@ -14,15 +17,36 @@ class HomeController extends Controller
     {
         $user = $request->user();
 
+
+
+        $streak = UserStreak::firstWhere(
+
+            'user_id',
+
+            $user->id
+
+        );
+
+        $totalXp = XpHistory::where(
+
+            'user_id',
+
+            $user->id
+
+        )->sum('xp');
+
         /*
         |--------------------------------------------------------------------------
         | Completed Lessons
         |--------------------------------------------------------------------------
         */
 
-        $completedLessons = UserProgress::where('user_id', $user->id)
-            ->where('completed', true)
-            ->count();
+        $completedLessons = UserProgress::where(
+            'user_id',
+            $user->id
+        )
+        ->where('completed', true)
+        ->count();
 
         /*
         |--------------------------------------------------------------------------
@@ -34,7 +58,7 @@ class HomeController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Progress
+        | Overall Progress
         |--------------------------------------------------------------------------
         */
 
@@ -44,22 +68,125 @@ class HomeController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | XP
+        | Total XP Earned
         |--------------------------------------------------------------------------
         */
 
-        $xp = $completedLessons * 20;
+        $xp = UserProgress::where(
+            'user_id',
+            $user->id
+        )->sum('xp');
 
         /*
         |--------------------------------------------------------------------------
-        | Continue Learning
+        | Completed Courses
         |--------------------------------------------------------------------------
         */
 
-        $continueLearning = UserProgress::with('lesson.course')
-            ->where('user_id', $user->id)
-            ->latest()
+       $completedCourses = CourseProgress::where(
+            'user_id',
+            $user->id
+        )
+        ->where('completed', true)
+        ->count();
+
+       
+
+        /*
+|--------------------------------------------------------------------------
+| Continue Learning (Next Unlocked Lesson)
+|--------------------------------------------------------------------------
+*/
+
+$continueLearning = null;
+
+/*
+|--------------------------------------------------------------------------
+| Get Courses In Order
+|--------------------------------------------------------------------------
+*/
+
+$courses = Course::where('is_active', true)
+    ->orderBy('display_order')
+    ->get();
+
+foreach ($courses as $course) {
+
+    /*
+    |--------------------------------------------------------------------------
+    | Get Lessons
+    |--------------------------------------------------------------------------
+    */
+
+    $lessons = Lesson::where(
+        'course_id',
+        $course->id
+    )
+    ->orderBy('order')
+    ->get();
+
+    foreach ($lessons as $lesson) {
+
+        /*
+        |--------------------------------------------------------------------------
+        | Already Completed?
+        |--------------------------------------------------------------------------
+        */
+
+        $completed = UserProgress::where(
+            'user_id',
+            $user->id
+        )
+        ->where(
+            'lesson_id',
+            $lesson->id
+        )
+        ->where(
+            'completed',
+            true
+        )
+        ->exists();
+
+        /*
+        |--------------------------------------------------------------------------
+        | First Uncompleted Lesson
+        |--------------------------------------------------------------------------
+        */
+
+        if (!$completed) {
+
+            $courseProgress = CourseProgress::where(
+                'user_id',
+                $user->id
+            )
+            ->where(
+                'course_id',
+                $course->id
+            )
             ->first();
+
+            $continueLearning = [
+
+                'course_id' => $course->id,
+
+                'course_title' => $course->title,
+
+                'lesson_id' => $lesson->id,
+
+                'lesson_title' => $lesson->title,
+
+                'progress' => $courseProgress
+                    ? $courseProgress->progress_percentage
+                    : 0
+
+            ];
+
+            break 2;
+        }
+    }
+}
+
+
 
         /*
         |--------------------------------------------------------------------------
@@ -71,6 +198,12 @@ class HomeController extends Controller
             ->orderBy('display_order')
             ->take(5)
             ->get();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Response
+        |--------------------------------------------------------------------------
+        */
 
         return response()->json([
 
@@ -88,6 +221,8 @@ class HomeController extends Controller
 
                 'stats' => [
 
+                    'completed_courses' => $completedCourses,
+
                     'completed_lessons' => $completedLessons,
 
                     'total_lessons' => $totalLessons,
@@ -98,21 +233,19 @@ class HomeController extends Controller
 
                 ],
 
-                'continue_learning' => $continueLearning
-                ? [
+              'continue_learning' => $continueLearning,
 
-                    'course_id' => $continueLearning->lesson->course->id,
+                'featured_courses' => $featuredCourses,
 
-                    'course_title' => $continueLearning->lesson->course->title,
+                'stats'=>[
 
-                    'lesson_id' => $continueLearning->lesson->id,
+                    'xp'=>$totalXp,
 
-                    'lesson_title' => $continueLearning->lesson->title,
+                    'current_streak'=>$streak->current_streak ?? 0,
 
-                ]
-                : null,
+                    'longest_streak'=>$streak->longest_streak ?? 0
 
-                'featured_courses' => $featuredCourses
+                ],
 
             ]
 

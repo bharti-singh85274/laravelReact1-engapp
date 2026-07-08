@@ -9,37 +9,59 @@ use App\Models\QuizResult;
 use App\Models\UserProgress;
 use App\Models\CourseProgress;
 use App\Models\Lesson;
+use App\Models\XpHistory;
+use App\Models\UserStreak;
 
 class QuizController extends Controller
 {
-    /**
-     * Get quiz questions of a lesson
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | Get Quiz Questions
+    |--------------------------------------------------------------------------
+    */
+
     public function quiz($id)
     {
-        $questions = Question::where('lesson_id', $id)->get();
+        $questions = Question::where(
+            'lesson_id',
+            $id
+        )->get();
 
         return response()->json([
+
             'success' => true,
+
             'data' => $questions
+
         ]);
     }
 
-    /**
-     * Submit Quiz
-     */
+    /*
+    |--------------------------------------------------------------------------
+    | Submit Quiz
+    |--------------------------------------------------------------------------
+    */
+
     public function submit(Request $request)
     {
         $request->validate([
+
             'lesson_id' => 'required|exists:lessons,id',
-            'answers'   => 'required|array'
+
+            'answers' => 'required|array'
+
         ]);
 
         $user = $request->user();
 
-        $lesson = Lesson::findOrFail($request->lesson_id);
+        $lesson = Lesson::findOrFail(
+            $request->lesson_id
+        );
 
-        $questions = Question::where('lesson_id', $lesson->id)->get();
+        $questions = Question::where(
+            'lesson_id',
+            $lesson->id
+        )->get();
 
         $correct = 0;
 
@@ -48,7 +70,9 @@ class QuizController extends Controller
             $answer = $request->answers[$question->id] ?? null;
 
             if ($answer == $question->correct_answer) {
+
                 $correct++;
+
             }
         }
 
@@ -92,7 +116,8 @@ class QuizController extends Controller
 
         $courseProgress = null;
 
-        /*
+
+                /*
         |--------------------------------------------------------------------------
         | Update Progress Only If Quiz Passed
         |--------------------------------------------------------------------------
@@ -100,32 +125,195 @@ class QuizController extends Controller
 
         if ($passed) {
 
+            /*
+            |--------------------------------------------------------------------------
+            | Check if lesson already completed
+            |--------------------------------------------------------------------------
+            */
+
+            $alreadyCompleted = UserProgress::where(
+
+                'user_id',
+                $user->id
+
+            )
+            ->where(
+
+                'lesson_id',
+                $lesson->id
+
+            )
+            ->where(
+
+                'completed',
+                true
+
+            )
+            ->exists();
+
+            /*
+            |--------------------------------------------------------------------------
+            | Give XP & Update Streak
+            | Only on first successful completion
+            |--------------------------------------------------------------------------
+            */
+
+            if (!$alreadyCompleted) {
+
+                /*
+                |--------------------------------------------------------------------------
+                | XP History
+                |--------------------------------------------------------------------------
+                */
+
+                XpHistory::create([
+
+                    'user_id' => $user->id,
+
+                    'lesson_id' => $lesson->id,
+
+                    'xp' => $xp,
+
+                    'reason' => 'Lesson Quiz Completed'
+
+                ]);
+
+                /*
+                |--------------------------------------------------------------------------
+                | User Streak
+                |--------------------------------------------------------------------------
+                */
+
+                $streak = UserStreak::firstOrCreate(
+
+                    [
+
+                        'user_id' => $user->id
+
+                    ]
+
+                );
+
+                $today = today();
+
+                if (!$streak->last_activity_date) {
+
+                    $streak->current_streak = 1;
+
+                }
+
+                elseif ($streak->last_activity_date->equalTo($today)) {
+
+                    // Already counted today
+
+                }
+
+                elseif (
+
+                    $streak->last_activity_date->equalTo(
+
+                        $today->copy()->subDay()
+
+                    )
+
+                ) {
+
+                    $streak->current_streak++;
+
+                }
+
+                else {
+
+                    $streak->current_streak = 1;
+
+                }
+
+                $streak->last_activity_date = $today;
+
+                if (
+
+                    $streak->current_streak >
+
+                    $streak->longest_streak
+
+                ) {
+
+                    $streak->longest_streak =
+
+                        $streak->current_streak;
+
+                }
+
+                $streak->save();
+
+            }
+
+
+                        /*
+            |--------------------------------------------------------------------------
+            | User Progress
+            |--------------------------------------------------------------------------
+            */
+
             UserProgress::updateOrCreate(
 
                 [
+
                     'user_id' => $user->id,
+
                     'lesson_id' => $lesson->id
+
                 ],
 
                 [
-                    'completed' => true
+
+                    'score' => $correct,
+
+                    'percentage' => $percentage,
+
+                    'xp' => $xp,
+
+                    'completed' => true,
+
+                    'completed_at' => now()
+
                 ]
 
             );
 
+            /*
+            |--------------------------------------------------------------------------
+            | Course Progress Calculation
+            |--------------------------------------------------------------------------
+            */
+
             $totalLessons = Lesson::where(
+
                 'course_id',
                 $lesson->course_id
+
             )->count();
 
             $completedLessons = UserProgress::where(
+
                 'user_id',
                 $user->id
+
             )
-            ->where('completed', true)
+            ->where(
+
+                'completed',
+                true
+
+            )
             ->whereHas('lesson', function ($query) use ($lesson) {
 
-                $query->where('course_id', $lesson->course_id);
+                $query->where(
+
+                    'course_id',
+                    $lesson->course_id
+
+                );
 
             })
             ->count();
@@ -148,13 +336,20 @@ class QuizController extends Controller
 
             ]);
 
-            // Set only once
+            /*
+            |--------------------------------------------------------------------------
+            | Started At
+            |--------------------------------------------------------------------------
+            */
+
+
             if (!$courseProgress->started_at) {
 
-                $courseProgress->started_at = now();
+                    $courseProgress->started_at = now();
 
-            }
+                }
 
+         
             $courseProgress->completed_lessons = $completedLessons;
 
             $courseProgress->total_lessons = $totalLessons;
@@ -171,67 +366,56 @@ class QuizController extends Controller
             |--------------------------------------------------------------------------
             */
 
+            
             if ($progress == 0) {
 
-                $courseProgress->status = 'not_started';
+    $courseProgress->status = 'not_started';
+    $courseProgress->completed = false;
+    $courseProgress->completed_at = null;
 
-                $courseProgress->completed_at = null;
+}
+elseif ($progress < 100) {
 
-            } elseif ($progress < 100) {
+    $courseProgress->status = 'in_progress';
+    $courseProgress->completed = false;
+    $courseProgress->completed_at = null;
 
-                $courseProgress->status = 'in_progress';
+}
+else {
 
-                $courseProgress->completed_at = null;
+    $courseProgress->status = 'completed';
+    $courseProgress->completed = true;
 
-            } else {
+    if (!$courseProgress->completed_at) {
 
-                $courseProgress->status = 'completed';
+        $courseProgress->completed_at = now();
 
-                if (!$courseProgress->completed_at) {
-
-                    $courseProgress->completed_at = now();
-
-                }
-
-            }
-
-            $courseProgress->save();
-        }
-
-        /*
-        |--------------------------------------------------------------------------
-        | Response
-        |--------------------------------------------------------------------------
-        */
-
-        return response()->json([
-
-            'success' => true,
-
-            'quiz' => [
-
-                'score' => $correct,
-
-                'total' => $total,
-
-                'wrong' => $wrong,
-
-                'percentage' => $percentage,
-
-                'passed' => $passed,
-
-                'xp' => $xp
-
-            ],
-
-            'lesson' => [
-
-                'completed' => $passed
-
-            ],
-
-            'course_progress' => $courseProgress
-
-        ]);
     }
 }
+
+$courseProgress->save();
+
+} // <-- end if ($passed)
+
+    return response()->json([
+        'success' => true,
+        'quiz' => [
+            'score' => $correct,
+            'total' => $total,
+            'wrong' => $wrong,
+            'percentage' => $percentage,
+            'passed' => $passed,
+            'xp' => $xp,
+        ],
+        'lesson' => [
+            'completed' => $passed,
+        ],
+        'course_progress' => $courseProgress,
+    ]);
+
+
+       }
+
+             
+     }
+

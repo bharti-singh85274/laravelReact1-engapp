@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Database\Seeders\Questions\BasicEnglishQuestionSeeder;
+use Database\Seeders\Questions\DailyConversationQuestionSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -10,7 +12,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-             QuestionSeeder::class,
+            CourseSeeder::class,
+            LessonSeeder::class,
+            BasicEnglishQuestionSeeder::class,
+             DailyConversationQuestionSeeder::class,
+           
         ]);
     }
 }

@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateCourseProgressTable extends Migration
+{
+    public function up()
+    {
+        Schema::create('course_progress', function (Blueprint $table) {
+
+            $table->id();
+
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
+            $table->foreignId('course_id')->constrained()->onDelete('cascade');
+
+            $table->integer('completed_lessons')->default(0);
+
+            $table->integer('progress')->default(0);
+
+            $table->boolean('completed')->default(false);
+
+            $table->timestamp('completed_at')->nullable();
+
+            $table->timestamps();
+
+            $table->unique(['user_id','course_id']);
+
+        });
+    }
+
+    public function down()
+    {
+        Schema::dropIfExists('course_progress');
+    }
+}

@@ -111,12 +111,64 @@ class CourseSeeder extends Seeder
                 'xp_reward' => 450,
                 'theme_color' => '#EC4899',
                 'display_order' => 6,
-            ]
+            ],
+
+            [
+                'title' => 'Business English',
+                'slug' => 'business-english',
+                'thumbnail' => 'courses/business.png',
+                'short_description' => 'Professional English for work.',
+                'description' => 'Learn office communication, meetings, emails, interviews and workplace vocabulary.',
+                'level' => 'Intermediate',
+                'category' => 'Business',
+                'lessons_count' => 30,
+                'duration' => '9 Hours',
+                'rating' => 4.9,
+                'students_count' => 8420,
+                'xp_reward' => 500,
+                'theme_color' => '#009688',
+                'display_order' => 7,
+            ],
+
+           [
+            'title' => 'English Practice',
+            'slug' => 'english-practice',
+            'thumbnail' => 'courses/practice.png',
+            'short_description' => 'Practice what you have learned.',
+            'description' => 'Strengthen your English through exercises, quizzes and revision lessons.',
+            'level' => 'Beginner',
+            'category' => 'Practice',
+            'lessons_count' => 30,
+            'duration' => '6 Hours',
+            'rating' => 4.9,
+            'students_count' => 10000,
+            'xp_reward' => 300,
+            'theme_color' => '#795548',
+            'is_premium' => false,
+            'is_active' => true,
+            'display_order' => 8,
+        ],
+
 
         ];
 
+        // foreach ($courses as $course) {
+        //     Course::create($course);
+        // }
+
         foreach ($courses as $course) {
-            Course::create($course);
-        }
+
+    Course::updateOrCreate(
+
+        [
+            'slug' => $course['slug'],
+        ],
+
+        $course
+
+    );
+
+}
+
     }
 }

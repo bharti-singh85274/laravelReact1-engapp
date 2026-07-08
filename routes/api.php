@@ -44,6 +44,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/courses/{slug}', [CourseController::class, 'show']);
     Route::get('/continue-learning', [CourseController::class, 'continueLearning']);
     Route::get('/search', [CourseController::class, 'search']);
+    Route::get('/courses/{id}/details',[CourseController::class, 'details']);
 
     // Lessons
     Route::get('/courses/{id}/lessons', [LessonController::class, 'lessons']);
@@ -52,7 +53,8 @@ Route::middleware('auth:sanctum')->group(function () {
      // Progress
     Route::post('/lesson/complete', [ProgressController::class, 'complete']);
     Route::get('/progress', [ProgressController::class, 'progress']);
-    Route::get('/courses/{slug}/lessons', [LessonController::class, 'lessonsBySlug']);
+    // Route::get('/courses/{slug}/lessons', [LessonController::class, 'lessonsBySlug']);
+    Route::get('/courses/slug/{slug}/lessons', [LessonController::class, 'lessonsBySlug']);
 
     // Quiz
     Route::get('/lessons/{id}/quiz', [QuizController::class, 'quiz']);

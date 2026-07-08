@@ -18,13 +18,15 @@ class CourseProgress extends Model
 
         'total_lessons',
 
+        // 'progress',
+
         'progress_percentage',
 
         'status',
 
-        'last_lesson_id',
+        'completed',
 
-        'time_spent_seconds',
+        'last_lesson_id',
 
         'started_at',
 
@@ -36,6 +38,8 @@ class CourseProgress extends Model
 
     protected $casts = [
 
+        'completed' => 'boolean',
+
         'started_at' => 'datetime',
 
         'completed_at' => 'datetime',
@@ -44,18 +48,27 @@ class CourseProgress extends Model
 
     ];
 
-    public function course()
-    {
-        return $this->belongsTo(Course::class);
-    }
+    /*
+    |--------------------------------------------------------------------------
+    | Relationships
+    |--------------------------------------------------------------------------
+    */
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
     public function lesson()
     {
-        return $this->belongsTo(Lesson::class,'last_lesson_id');
+        return $this->belongsTo(
+            Lesson::class,
+            'last_lesson_id'
+        );
     }
 }
