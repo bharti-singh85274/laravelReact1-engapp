@@ -43,24 +43,48 @@ public function changePassword(Request $request)
         'new_password' => 'required|min:6|confirmed',
     ]);
 
+
     $user = $request->user();
+
 
     if (!Hash::check($request->current_password, $user->password)) {
 
         throw ValidationException::withMessages([
-            'current_password' => ['Current password is incorrect.'],
+            'current_password' => [
+                'Current password is incorrect.'
+            ],
         ]);
 
     }
 
-    $user->password = Hash::make($request->new_password);
+
+
+    // Update password
+
+    $user->password = Hash::make(
+        $request->new_password
+    );
 
     $user->save();
 
+
+
+    // Remove current login token
+
+    $request->user()
+            ->currentAccessToken()
+            ->delete();
+
+
+
     return response()->json([
-        'success' => true,
-        'message' => 'Password changed successfully.'
+
+        'success'=>true,
+
+        'message'=>'Password changed successfully. Please login again.'
+
     ]);
+
 }
 
 
