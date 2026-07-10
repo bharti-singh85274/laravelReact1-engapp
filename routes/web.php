@@ -16,3 +16,29 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+use Illuminate\Support\Facades\Mail;
+
+
+Route::get('/test-mail', function () {
+
+    try {
+
+        Mail::raw('This is a Laravel Test Email.', function ($message) {
+
+            $message->to('bhartisingh.2503@gmail.com')
+                    ->subject('Laravel SMTP Test');
+
+        });
+
+        return 'Mail Sent Successfully';
+
+    } catch (\Exception $e) {
+
+        return $e->getMessage();
+
+    }
+
+});
+

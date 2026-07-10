@@ -9,6 +9,10 @@ use App\Http\Controllers\Api\LessonController;
 use App\Http\Controllers\Api\ProgressController;
 use App\Http\Controllers\Api\QuizController;
 use App\Http\Controllers\Api\HomeController;
+use Illuminate\Support\Facades\Mail;
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +33,11 @@ use App\Http\Controllers\Api\HomeController;
 
 
   Route::post('/login', [AuthController::class, 'login']);
+  Route::post('/register', [AuthController::class, 'register']);
+  Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
+  Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
+  Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+
 Route::middleware('auth:sanctum')->group(function () {
 
   

@@ -219,7 +219,7 @@ foreach ($courses as $course) {
 
                 ],
 
-                'stats' => [
+              'stats' => [
 
                     'completed_courses' => $completedCourses,
 
@@ -229,7 +229,11 @@ foreach ($courses as $course) {
 
                     'progress' => $progress,
 
-                    'xp' => $xp
+                    'xp' => $totalXp,
+
+                    'current_streak' => $streak->current_streak ?? 0,
+
+                    'longest_streak' => $streak->longest_streak ?? 0,
 
                 ],
 
@@ -237,15 +241,7 @@ foreach ($courses as $course) {
 
                 'featured_courses' => $featuredCourses,
 
-                'stats'=>[
-
-                    'xp'=>$totalXp,
-
-                    'current_streak'=>$streak->current_streak ?? 0,
-
-                    'longest_streak'=>$streak->longest_streak ?? 0
-
-                ],
+               
 
             ]
 

@@ -117,8 +117,8 @@ class CourseController extends Controller
         $user = $request->user();
 
        $progress = CourseProgress::where('user_id', $user->id)
-    ->latest('updated_at')
-    ->first();
+            ->latest('updated_at')
+            ->first();
 
         // First time user
         if (!$progress) {
@@ -205,7 +205,7 @@ class CourseController extends Controller
                     // Always calculate from lessons table
                     'total_lessons' => $course->lessons()->count(),
 
-                   'percentage' => $progress->progress
+                   'percentage' => $progress->progress_percentage
 
                 ]
 
