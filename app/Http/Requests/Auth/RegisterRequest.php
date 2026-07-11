@@ -11,33 +11,71 @@ class RegisterRequest extends FormRequest
         return true;
     }
 
-    public function rules()
-    {
-        return [
+   public function rules()
+{
+    return [
 
-            'name' => 'required|string|max:255',
+        'name' => [
+            'required',
+            'string',
+            'min:3',
+            'max:50',
+            'regex:/^[A-Za-z ]+$/'
+        ],
 
-            'email' => 'required|email|unique:users,email',
+        'email' => [
+            'required',
+            'email:rfc,dns',
+            'max:100',
+            'unique:users,email'
+        ],
 
-            'password' => 'required|min:8|confirmed',
+        'password' => [
+            'required',
+            'string',
+            'min:8',
+            'confirmed'
+        ],
 
-        ];
-    }
+    ];
+}
 
-    public function messages()
-    {
-        return [
 
-            'name.required' => 'Name is required.',
+  
+public function messages()
+{
+    return [
 
-            'email.required' => 'Email is required.',
+        'name.required' =>
+            'Please enter your full name.',
 
-            'email.unique' => 'Email already exists.',
+        'name.min' =>
+            'Name must contain at least 3 characters.',
 
-            'password.required' => 'Password is required.',
+        'name.regex' =>
+            'Name can contain only letters and spaces.',
 
-            'password.confirmed' => 'Passwords do not match.'
+        'email.required' =>
+            'Please enter your email address.',
 
-        ];
-    }
+        'email.email' =>
+            'Please enter a valid email address.',
+
+        'email.unique' =>
+            'This email is already registered.',
+
+        'password.required' =>
+            'Please enter your password.',
+
+        'password.min' =>
+            'Password must be at least 8 characters.',
+
+        'password.confirmed' =>
+            'Passwords do not match.',
+
+    ];
+}
+
+
+
 }

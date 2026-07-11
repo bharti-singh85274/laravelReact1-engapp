@@ -35,4 +35,11 @@ class QuizResult extends Model
     {
         return $this->belongsTo(Lesson::class);
     }
+
+    public function answers()
+    {
+        return $this->hasMany(QuizAnswer::class);
+    }
+
+
 }

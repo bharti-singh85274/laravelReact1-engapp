@@ -11,9 +11,23 @@ use App\Models\CourseProgress;
 use App\Models\Lesson;
 use App\Models\XpHistory;
 use App\Models\UserStreak;
+use App\Models\QuizAnswer;
+use App\Services\Quiz\QuizReviewService;
 
 class QuizController extends Controller
 {
+
+    protected QuizReviewService $quizReviewService;
+
+    public function __construct(
+        QuizReviewService $quizReviewService
+    ) {
+        $this->quizReviewService = $quizReviewService;
+    }
+
+
+
+
     /*
     |--------------------------------------------------------------------------
     | Get Quiz Questions
@@ -94,7 +108,7 @@ class QuizController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        QuizResult::create([
+      $quizResult = QuizResult::create([
 
             'user_id' => $user->id,
 
@@ -113,11 +127,40 @@ class QuizController extends Controller
             'xp_earned' => $xp
 
         ]);
+  
+
+        /*
+        |--------------------------------------------------------------------------
+        | Save User Answers
+        |--------------------------------------------------------------------------
+        */
+
+    foreach ($questions as $question) {
+
+        $selectedAnswer = $request->answers[$question->id] ?? null;
+
+        QuizAnswer::create([
+
+            'quiz_result_id' => $quizResult->id,
+
+            'question_id' => $question->id,
+
+            'selected_answer' => $selectedAnswer,
+
+            'correct_answer' => $question->correct_answer,
+
+            'is_correct' => $selectedAnswer === $question->correct_answer
+
+        ]);
+
+    }
+
+
+
 
         $courseProgress = null;
 
-
-                /*
+        /*
         |--------------------------------------------------------------------------
         | Update Progress Only If Quiz Passed
         |--------------------------------------------------------------------------
@@ -415,6 +458,31 @@ $courseProgress->save();
 
 
        }
+
+
+
+
+
+
+       /*
+|--------------------------------------------------------------------------
+| Quiz Review
+|--------------------------------------------------------------------------
+*/
+
+public function review(Request $request, $lessonId)
+{
+    $review = $this->quizReviewService
+        ->getReview($request->user(), $lessonId);
+
+    return response()->json([
+
+        'success' => true,
+
+        'data' => $review
+
+    ]);
+}
 
              
      }
