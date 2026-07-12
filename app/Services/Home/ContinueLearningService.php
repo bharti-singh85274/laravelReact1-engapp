@@ -30,23 +30,53 @@ class ContinueLearningService
 
                 if (!$completed) {
 
-                    $courseProgress = CourseProgress::where('user_id', $user->id)
-                        ->where('course_id', $course->id)
-                        ->first();
+                    $courseProgress = CourseProgress::where(
+                        'user_id',
+                        $user->id
+                    )
+                    ->where(
+                        'course_id',
+                        $course->id
+                    )
+                    ->first();
 
                     return [
 
-                        'course_id' => $course->id,
+                        'course' => [
 
-                        'course_title' => $course->title,
+                            'id' => $course->id,
 
-                        'lesson_id' => $lesson->id,
+                            'title' => $course->title,
 
-                        'lesson_title' => $lesson->title,
+                            'slug' => $course->slug,
+
+                            'thumbnail' => $course->thumbnail,
+
+                        ],
+
+                        'lesson' => [
+
+                            'id' => $lesson->id,
+
+                            'title' => $lesson->title,
+
+                        ],
 
                         'progress' => $courseProgress
                             ? $courseProgress->progress_percentage
-                            : 0
+                            : 0,
+
+                        'completed_lessons' => $courseProgress
+                            ? $courseProgress->completed_lessons
+                            : 0,
+
+                        'total_lessons' => $courseProgress
+                            ? $courseProgress->total_lessons
+                            : $lessons->count(),
+
+                        'status' => $courseProgress
+                            ? $courseProgress->status
+                            : 'not_started',
 
                     ];
                 }

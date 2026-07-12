@@ -4,22 +4,27 @@ namespace App\Services\Home;
 
 use App\Models\Course;
 use App\Models\CourseProgress;
+use App\Models\Lesson;
 
 class RecommendationService
 {
     public function getRecommendations($user)
     {
-        $completedCourseIds = CourseProgress::where('user_id', $user->id)
-            ->where('completed', true)
-            ->pluck('course_id');
-
         $courses = Course::where('is_active', true)
-            ->whereNotIn('id', $completedCourseIds)
             ->orderBy('display_order')
-            ->take(5)
             ->get();
 
-        return $courses->map(function ($course) {
+        return $courses->map(function ($course) use ($user) {
+
+            $progress = CourseProgress::where(
+                'user_id',
+                $user->id
+            )
+            ->where(
+                'course_id',
+                $course->id
+            )
+            ->first();
 
             return [
 
@@ -33,7 +38,26 @@ class RecommendationService
 
                 'difficulty' => $course->difficulty,
 
-                'reason' => $this->getReason($course)
+                'reason' => $this->getReason($course),
+
+                'progress' => $progress
+                    ? $progress->progress_percentage
+                    : 0,
+
+                'completed_lessons' => $progress
+                    ? $progress->completed_lessons
+                    : 0,
+
+                'total_lessons' => $progress
+                    ? $progress->total_lessons
+                    : Lesson::where(
+                        'course_id',
+                        $course->id
+                    )->count(),
+
+                'status' => $progress
+                    ? $progress->status
+                    : 'not_started',
 
             ];
 

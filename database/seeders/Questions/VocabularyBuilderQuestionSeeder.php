@@ -32,7 +32,12 @@ class VocabularyBuilderQuestionSeeder extends Seeder
 
         $questions = [
 
-           
+ /*
+|--------------------------------------------------------------------------
+| Lesson 1 : Common Daily Words
+|--------------------------------------------------------------------------
+*/
+
 [
     'lesson_id'=>$lesson1->id,
     'question'=>'Which word is commonly used every day?',
@@ -43,6 +48,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Planet'
     ],
     'correct_answer'=>'Water',
+    'explanation'=>'Water is an essential daily-use word because people use and talk about water every day.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -57,6 +63,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Shoes'
     ],
     'correct_answer'=>'Book',
+    'explanation'=>'A book is something we read to gain knowledge, information, or entertainment.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -71,6 +78,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Food'
     ],
     'correct_answer'=>'Chair',
+    'explanation'=>'A chair is a piece of furniture designed for sitting.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -85,6 +93,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'School'
     ],
     'correct_answer'=>'Pen',
+    'explanation'=>'A pen is a common writing tool used to write on paper.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -99,13 +108,18 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Jupiter'
     ],
     'correct_answer'=>'House',
+    'explanation'=>'A house is a common everyday word because it refers to the place where people live.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
 
 
+/*
+|--------------------------------------------------------------------------
+| Lesson 2 : Colors
+|--------------------------------------------------------------------------
+*/
 
-         
 [
     'lesson_id'=>$lesson2->id,
     'question'=>'What is the color of an apple in the lesson example?',
@@ -116,6 +130,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'White'
     ],
     'correct_answer'=>'Red',
+    'explanation'=>'Apples are commonly shown as red in beginner English lessons, making "Red" the expected answer.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -130,6 +145,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Pink'
     ],
     'correct_answer'=>'Blue',
+    'explanation'=>'During a clear day, the sky appears blue because of the scattering of sunlight in the atmosphere.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -144,6 +160,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'White'
     ],
     'correct_answer'=>'Green',
+    'explanation'=>'The lesson uses a green bag as an example to help learners remember color vocabulary.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -158,6 +175,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Book'
     ],
     'correct_answer'=>'Yellow',
+    'explanation'=>'Yellow is a color, while the other options are objects or animals.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -172,13 +190,19 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Pink'
     ],
     'correct_answer'=>'Purple',
+    'explanation'=>'Purple is not included in this lesson, while Red, Blue, and Pink are covered.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
 
 
 
-       
+/*
+|--------------------------------------------------------------------------
+| Lesson 3 : Days and Months
+|--------------------------------------------------------------------------
+*/
+
 [
     'lesson_id'=>$lesson3->id,
     'question'=>'How many days are there in a week?',
@@ -189,6 +213,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         '8'
     ],
     'correct_answer'=>'7',
+    'explanation'=>'A week has seven days: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, and Sunday.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -203,6 +228,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Sunday'
     ],
     'correct_answer'=>'Tuesday',
+    'explanation'=>'Tuesday is the second day of the week and comes immediately after Monday.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -217,6 +243,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'May'
     ],
     'correct_answer'=>'March',
+    'explanation'=>'March is the third month of the year and follows February.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -231,6 +258,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'December'
     ],
     'correct_answer'=>'January',
+    'explanation'=>'January is the first month in the Gregorian calendar.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -245,11 +273,18 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Thursday'
     ],
     'correct_answer'=>'Saturday',
+    'explanation'=>'Saturday is the day immediately before Sunday.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
 
 
+
+/*
+|--------------------------------------------------------------------------
+| Lesson 4 : Animals
+|--------------------------------------------------------------------------
+*/
 
 [
     'lesson_id'=>$lesson4->id,
@@ -261,6 +296,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Monkey'
     ],
     'correct_answer'=>'Lion',
+    'explanation'=>'The lion is commonly called the "King of the Jungle" because it symbolizes strength, courage, and leadership.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -275,6 +311,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Cow'
     ],
     'correct_answer'=>'Dog',
+    'explanation'=>'Dogs communicate by barking, while cats meow, cows moo, and horses neigh.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -289,6 +326,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Monkey'
     ],
     'correct_answer'=>'Elephant',
+    'explanation'=>'The elephant is the largest living land animal in the world.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -303,6 +341,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Elephant'
     ],
     'correct_answer'=>'Cat',
+    'explanation'=>'Cats are one of the most common household pets because they are friendly and easy to care for.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -317,13 +356,18 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Cow'
     ],
     'correct_answer'=>'Horse',
+    'explanation'=>'Horses are fast animals that have been used for riding and transportation for thousands of years.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
          
+/*
+|--------------------------------------------------------------------------
+| Lesson 5 : Fruits and Vegetables
+|--------------------------------------------------------------------------
+*/
 
-
-         [
+[
     'lesson_id'=>$lesson5->id,
     'question'=>'Which of these is a fruit?',
     'options'=>[
@@ -333,6 +377,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Carrot'
     ],
     'correct_answer'=>'Apple',
+    'explanation'=>'An apple is a fruit because it develops from the flower of a plant and contains seeds.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -347,6 +392,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Apple'
     ],
     'correct_answer'=>'Mango',
+    'explanation'=>'Mango is popularly known as the "King of Fruits" because of its rich taste, aroma, and popularity.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -361,6 +407,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Orange'
     ],
     'correct_answer'=>'Tomato',
+    'explanation'=>'In this lesson, tomato is treated as a vegetable because it is commonly used in cooking, although botanically it is a fruit.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -375,6 +422,7 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'Tomato'
     ],
     'correct_answer'=>'Carrot',
+    'explanation'=>'Carrots are naturally orange and are a good source of vitamin A.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -389,9 +437,13 @@ class VocabularyBuilderQuestionSeeder extends Seeder
         'The onion is flying.'
     ],
     'correct_answer'=>'I like mangoes.',
+    'explanation'=>'This is the only meaningful and grammatically correct sentence among the options.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
+
+
+
 
         ];
 

@@ -34,7 +34,8 @@ public function progress(Request $request)
         "percentage" => $totalLessons > 0
             ? round(($completedCount / $totalLessons) * 100)
             : 0,
-        "xp" => $completedCount * 20
+       
+        "xp" => $request->user()->fresh()->xp
     ]);
 }
 
@@ -138,9 +139,13 @@ public function complete(Request $request)
 
             'last_opened_at' => Carbon::now(),
 
-            'status' => $completedLessons == $totalLessons
-                ? 'completed'
-                : 'in_progress',
+           'status' => $completedLessons == 0
+                ? 'not_started'
+                : (
+                    $completedLessons == $totalLessons
+                        ? 'completed'
+                        : 'in_progress'
+                ),
 
             'started_at' => now(),
 

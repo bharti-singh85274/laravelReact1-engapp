@@ -26,8 +26,9 @@ class StatsService
         |--------------------------------------------------------------------------
         */
 
-        $totalXp = XpHistory::where('user_id', $user->id)
-            ->sum('xp');
+        // $totalXp = XpHistory::where('user_id', $user->id)
+        //     ->sum('xp');
+        $totalXp = $user->xp ?? 0;
 
         /*
         |--------------------------------------------------------------------------

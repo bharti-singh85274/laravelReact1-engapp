@@ -111,16 +111,33 @@ $lessons->transform(function ($lesson) use ($lessons, $completed) {
     |--------------------------------------------------------------------------
     */
 
-    public function show($id)
-    {
-        return response()->json([
+public function show($id)
+{
+    $lesson = Lesson::findOrFail($id);
 
-            'success' => true,
+    $questionCount = $lesson->questions()->count();
 
-            'data' => Lesson::findOrFail($id)
+    return response()->json([
+        'success' => true,
+        'data' => [
 
-        ]);
-    }
+            'id' => $lesson->id,
+            'course_id' => $lesson->course_id,
+
+            'title' => $lesson->title,
+            'content' => $lesson->content,
+            'video_url' => $lesson->video_url,
+
+            'question_count' => $questionCount,
+
+            'estimated_time' => max(1, ceil($questionCount * 0.6)),
+
+            'difficulty' => 'Beginner',
+
+            'xp_reward' => $questionCount * 10,
+        ]
+    ]);
+}
 
     /*
     |--------------------------------------------------------------------------

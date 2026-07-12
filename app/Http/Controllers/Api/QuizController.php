@@ -220,6 +220,10 @@ class QuizController extends Controller
                     'reason' => 'Lesson Quiz Completed'
 
                 ]);
+                $user->increment(
+                'xp',
+                $xp
+            );
 
                 /*
                 |--------------------------------------------------------------------------
@@ -412,49 +416,74 @@ class QuizController extends Controller
             
             if ($progress == 0) {
 
-    $courseProgress->status = 'not_started';
-    $courseProgress->completed = false;
-    $courseProgress->completed_at = null;
+            $courseProgress->status = 'not_started';
+            $courseProgress->completed = false;
+            $courseProgress->completed_at = null;
 
-}
-elseif ($progress < 100) {
+        }
+        elseif ($progress < 100) {
 
-    $courseProgress->status = 'in_progress';
-    $courseProgress->completed = false;
-    $courseProgress->completed_at = null;
+            $courseProgress->status = 'in_progress';
+            $courseProgress->completed = false;
+            $courseProgress->completed_at = null;
 
-}
-else {
+        }
+        else {
 
-    $courseProgress->status = 'completed';
-    $courseProgress->completed = true;
+            $courseProgress->status = 'completed';
+            $courseProgress->completed = true;
 
-    if (!$courseProgress->completed_at) {
+            if (!$courseProgress->completed_at) {
 
-        $courseProgress->completed_at = now();
+                $courseProgress->completed_at = now();
 
-    }
-}
+            }
+        }
 
-$courseProgress->save();
+        $courseProgress->save();
 
-} // <-- end if ($passed)
+        } // <-- end if ($passed)
 
-    return response()->json([
-        'success' => true,
-        'quiz' => [
-            'score' => $correct,
-            'total' => $total,
-            'wrong' => $wrong,
-            'percentage' => $percentage,
-            'passed' => $passed,
-            'xp' => $xp,
-        ],
-        'lesson' => [
-            'completed' => $passed,
-        ],
-        'course_progress' => $courseProgress,
-    ]);
+        return response()->json([
+
+            'success' => true,
+
+
+            'user' => [
+
+                'xp' => $user->fresh()->xp
+
+            ],
+
+
+            'quiz' => [
+
+                'score' => $correct,
+
+                'total' => $total,
+
+                'wrong' => $wrong,
+
+                'percentage' => $percentage,
+
+                'passed' => $passed,
+
+                'xp' => $xp,
+
+            ],
+
+
+            'lesson' => [
+
+                'id'=>$lesson->id,
+                'completed' => $passed,
+
+            ],
+
+
+            'course_progress' => $courseProgress,
+
+        ]);
 
 
        }

@@ -14,7 +14,9 @@ class Question extends Model
 
         'options',
 
-        'correct_answer'
+        'correct_answer',
+
+        'explanation',
 
     ];
 

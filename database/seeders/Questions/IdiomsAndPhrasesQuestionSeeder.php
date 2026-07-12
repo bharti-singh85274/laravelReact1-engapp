@@ -34,7 +34,10 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
 
             // Lesson questions go here
 
-            /*
+           
+
+
+/*
 |--------------------------------------------------------------------------
 | Lesson 1 : Break the Ice
 |--------------------------------------------------------------------------
@@ -50,6 +53,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Win a game'
     ],
     'correct_answer'=>'Start a friendly conversation',
+    'explanation'=>'The idiom "Break the Ice" means to start a conversation or activity that helps people feel comfortable, especially when they are meeting for the first time.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -64,6 +68,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'After leaving'
     ],
     'correct_answer'=>'At the beginning of a conversation',
+    'explanation'=>'People usually break the ice when they first meet others to reduce nervousness and create a friendly atmosphere.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -78,6 +83,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'He bought an ice cube.'
     ],
     'correct_answer'=>'I told a joke to break the ice.',
+    'explanation'=>'Here, "break the ice" means making everyone feel relaxed by starting a friendly conversation, not literally breaking ice.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -92,6 +98,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Sleepy'
     ],
     'correct_answer'=>'Comfortable',
+    'explanation'=>'Breaking the ice helps people feel comfortable and confident when interacting with new people.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -106,9 +113,12 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Cooking dinner'
     ],
     'correct_answer'=>'Meeting new classmates',
+    'explanation'=>'When meeting new classmates or colleagues, breaking the ice helps begin friendly conversations and build relationships.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
+
+
 
 
 /*
@@ -127,6 +137,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Very difficult'
     ],
     'correct_answer'=>'Very easy',
+    'explanation'=>'The idiom "Piece of Cake" means that something is very easy to do.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -141,6 +152,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Learning 10 languages in one day'
     ],
     'correct_answer'=>'Simple addition',
+    'explanation'=>'Simple addition is easy, so it can be described as "a piece of cake."',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -155,6 +167,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'My homework baked a cake.'
     ],
     'correct_answer'=>'The English quiz was a piece of cake.',
+    'explanation'=>'The idiom is used correctly because it means the English quiz was very easy.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -169,6 +182,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Dangerous'
     ],
     'correct_answer'=>'Easy',
+    'explanation'=>'"Easy" is the closest meaning of the idiom "Piece of Cake."',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -183,9 +197,11 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Counting from 1 to 10'
     ],
     'correct_answer'=>'A very difficult exam',
+    'explanation'=>'A very difficult exam is not easy, so it cannot be described as "a piece of cake."',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
+
 
 /*
 |--------------------------------------------------------------------------
@@ -203,6 +219,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Every month'
     ],
     'correct_answer'=>'Very rarely',
+    'explanation'=>'The idiom "Once in a Blue Moon" means something happens very rarely or infrequently.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -217,6 +234,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'I eat breakfast once in a blue moon.'
     ],
     'correct_answer'=>'I visit my old school once in a blue moon.',
+    'explanation'=>'Visiting an old school is an activity that may happen rarely, so the idiom is used correctly.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -231,6 +249,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Weekly'
     ],
     'correct_answer'=>'Rarely',
+    'explanation'=>'The idiom refers to events that happen very infrequently.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -245,6 +264,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Going to sleep'
     ],
     'correct_answer'=>'Meeting a childhood friend unexpectedly',
+    'explanation'=>'Unexpectedly meeting a childhood friend is a rare event, making it a good example of this idiom.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -259,9 +279,11 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Never'
     ],
     'correct_answer'=>'Frequently',
+    'explanation'=>'"Frequently" is the opposite of "Once in a Blue Moon," which means very rarely.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
+
 
 /*
 |--------------------------------------------------------------------------
@@ -279,6 +301,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Read comics'
     ],
     'correct_answer'=>'Start studying',
+    'explanation'=>'The idiom "Hit the Books" means to begin studying seriously, especially before an exam.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -293,6 +316,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Movies'
     ],
     'correct_answer'=>'Exams',
+    'explanation'=>'Students usually study hard before exams to prepare well.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -307,6 +331,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'I threw my books away.'
     ],
     'correct_answer'=>'I need to hit the books tonight.',
+    'explanation'=>'Here, "Hit the Books" is used as an idiom meaning "I need to study tonight."',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -321,6 +346,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Shopping'
     ],
     'correct_answer'=>'Studying',
+    'explanation'=>'"Hit the Books" is an idiom related to studying and learning.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -335,9 +361,12 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'A singer'
     ],
     'correct_answer'=>'A student',
+    'explanation'=>'Students commonly "hit the books" when preparing for tests, assignments, or exams.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -355,6 +384,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Leave work unfinished'
     ],
     'correct_answer'=>'Doing something late is better than never doing it',
+    'explanation'=>'This idiom means it is better to complete something late than to never complete it at all.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -369,6 +399,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'He ignored all his work.'
     ],
     'correct_answer'=>'He completed the course late but finished it.',
+    'explanation'=>'Finishing the course, even after a delay, is a good example of "Better Late Than Never."',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -383,6 +414,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Waste time'
     ],
     'correct_answer'=>'Complete important tasks',
+    'explanation'=>'The idiom encourages people to finish important work instead of leaving it unfinished.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -397,6 +429,7 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Books are never late.'
     ],
     'correct_answer'=>'I finally apologized—better late than never.',
+    'explanation'=>'The idiom is correctly used because the apology was delayed but still worthwhile.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -411,9 +444,11 @@ class IdiomsAndPhrasesQuestionSeeder extends Seeder
         'Skipping every class'
     ],
     'correct_answer'=>'Submitting an assignment after the deadline instead of not submitting it',
+    'explanation'=>'Submitting late is still better than not submitting at all, which is exactly what this idiom teaches.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
+
 
         ];
 

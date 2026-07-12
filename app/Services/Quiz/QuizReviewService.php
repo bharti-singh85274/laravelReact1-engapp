@@ -55,8 +55,7 @@ class QuizReviewService
 
                     'is_correct' => $answer->is_correct,
 
-                    // We'll add this after adding the explanation column
-                    'explanation' => null,
+                    'explanation' => $answer->question->explanation,
 
                 ];
 

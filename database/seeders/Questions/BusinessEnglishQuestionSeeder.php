@@ -33,7 +33,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         $questions = [
 
 
-        /*
+ /*
 |--------------------------------------------------------------------------
 | Lesson 1 : Office Introduction
 |--------------------------------------------------------------------------
@@ -49,6 +49,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'I do not work here.'
     ],
     'correct_answer'=>'Hello, I am Rahul from the Sales Department.',
+    'explanation'=>'A professional introduction should include your greeting, name, and department or job role.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -63,6 +64,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Hey Buddy!'
     ],
     'correct_answer'=>'Good Morning',
+    'explanation'=>'Good Morning is a polite and professional greeting commonly used before noon.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -77,6 +79,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Hobbies only'
     ],
     'correct_answer'=>'Name and job role',
+    'explanation'=>'A professional introduction usually includes your name and your job title or department.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -91,6 +94,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Do not talk to me.'
     ],
     'correct_answer'=>'Nice to meet you. I look forward to working with you.',
+    'explanation'=>'This sentence is polite, respectful and suitable for a professional workplace.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -105,9 +109,13 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Confuse colleagues'
     ],
     'correct_answer'=>'Build good professional relationships',
+    'explanation'=>'Polite communication builds trust, teamwork and positive professional relationships.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
+
+
+
 
 
 /*
@@ -126,6 +134,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Yes?'
     ],
     'correct_answer'=>'Good morning, ABC Company. This is Rahul speaking.',
+    'explanation'=>'A professional phone greeting includes the company name and your own introduction.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -140,6 +149,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Call later.'
     ],
     'correct_answer'=>'Could you please hold for a moment?',
+    'explanation'=>'This phrase politely asks the caller to wait while maintaining professionalism.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -154,6 +164,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Switch off the phone'
     ],
     'correct_answer'=>'Take a message',
+    'explanation'=>'Taking a message ensures the caller receives a response later and demonstrates professionalism.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -168,6 +179,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'I cannot help you.'
     ],
     'correct_answer'=>'I will transfer your call to the Sales Department.',
+    'explanation'=>'This politely informs the caller that they are being connected to the appropriate department.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -182,9 +194,11 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Finished.'
     ],
     'correct_answer'=>'Thank you for calling. Have a nice day.',
+    'explanation'=>'Ending with appreciation and a polite closing leaves a positive professional impression.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
+
 
 /*
 |--------------------------------------------------------------------------
@@ -202,6 +216,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Personal photos'
     ],
     'correct_answer'=>'A clear subject line',
+    'explanation'=>'A clear subject line helps the recipient understand the purpose of the email before opening it.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -216,6 +231,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Yo!'
     ],
     'correct_answer'=>'Dear Mr. Sharma,',
+    'explanation'=>'Formal emails begin with respectful greetings such as "Dear Mr. Sharma".',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -230,6 +246,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Catch you later'
     ],
     'correct_answer'=>'Kind Regards',
+    'explanation'=>'Professional email closings include phrases like "Kind Regards", "Best Regards" or "Sincerely".',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -244,6 +261,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Very casual'
     ],
     'correct_answer'=>'Polite and professional',
+    'explanation'=>'Business emails should always maintain a respectful, clear and professional tone.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -258,9 +276,12 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'To add emojis'
     ],
     'correct_answer'=>'To summarize the email topic',
+    'explanation'=>'The subject line briefly describes what the email is about, making it easier to organize and prioritize.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -278,6 +299,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Personal hobbies'
     ],
     'correct_answer'=>'The meeting agenda',
+    'explanation'=>'The meeting agenda outlines the topics to be discussed and helps keep the meeting organized.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -292,6 +314,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'I do not care.'
     ],
     'correct_answer'=>'I think we should consider this option.',
+    'explanation'=>'This phrase respectfully expresses your opinion while encouraging discussion.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -306,6 +329,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Stop talking.'
     ],
     'correct_answer'=>'I completely agree with your point.',
+    'explanation'=>'Agreeing politely shows respect and promotes positive teamwork.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -320,6 +344,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Leave without informing anyone'
     ],
     'correct_answer'=>'Listen carefully and take notes',
+    'explanation'=>'Active listening and note-taking help you understand discussions and remember important decisions.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -334,9 +359,11 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'They are only for managers'
     ],
     'correct_answer'=>'They record important decisions and action items',
+    'explanation'=>'Meeting minutes provide a written record of discussions, decisions and assigned tasks.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
+
 
 /*
 |--------------------------------------------------------------------------
@@ -354,6 +381,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Where do you shop?'
     ],
     'correct_answer'=>'Tell me about yourself.',
+    'explanation'=>'Interviewers often begin by asking you to introduce yourself and summarize your background.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -368,6 +396,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Overconfidence'
     ],
     'correct_answer'=>'Confidence and professionalism',
+    'explanation'=>'Employers value candidates who are confident, respectful and professional.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -382,6 +411,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Remain silent'
     ],
     'correct_answer'=>'Explain your skills honestly with examples',
+    'explanation'=>'Providing honest strengths with real examples demonstrates self-awareness and credibility.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -396,6 +426,7 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'By avoiding eye contact'
     ],
     'correct_answer'=>'Clearly and politely',
+    'explanation'=>'Clear, polite and well-structured answers create a positive impression during interviews.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
@@ -410,9 +441,11 @@ class BusinessEnglishQuestionSeeder extends Seeder
         'Nothing.'
     ],
     'correct_answer'=>'Thank you for your time and consideration.',
+    'explanation'=>'Ending with gratitude demonstrates professionalism and appreciation for the interviewer\'s time.',
     'created_at'=>now(),
     'updated_at'=>now(),
 ],
+
 
         ];
 
